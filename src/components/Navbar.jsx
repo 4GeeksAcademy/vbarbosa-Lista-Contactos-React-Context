@@ -4,13 +4,19 @@ export const Navbar = () => {
 
 	return (
 		<nav className="navbar navbar-light bg-light">
-			<div className="container">
+			<div className="container-fluid m-2 ">
 				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
+					<span className="navbar-brand mb-0 h1">
+						{/* I need to add icon here and edit the font to be more fancy */}
+						ICON HERE +
+						Mi Agenda
+					</span>
 				</Link>
-				<div className="ml-auto">
+				<div className="ms-end">
 					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
+						{/* This button is linked to demo file which should link to anther page
+						This same button will be able to create a new contact on the agenda */}
+						<button className="btn btn-success">Add New Contact</button>
 					</Link>
 				</div>
 			</div>
