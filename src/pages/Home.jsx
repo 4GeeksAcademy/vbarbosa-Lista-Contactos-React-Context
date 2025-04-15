@@ -1,6 +1,7 @@
 import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import {ModalBtn} from "../components/Modal.jsx";
+import { Single } from "./Single.jsx";
 
 
 export const Home = () => {
@@ -11,6 +12,7 @@ export const Home = () => {
 	return (
 
 		<div className="container-fluid p-3">
+			{Single}
             {/* Add here the component from DEMO */}
 			<div className="card mb-3">
               <div className="row g-0 justify-content-center">

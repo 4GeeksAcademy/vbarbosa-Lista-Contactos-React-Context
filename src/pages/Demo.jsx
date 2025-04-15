@@ -9,18 +9,16 @@ export const Demo = () => {
   const { store, dispatch } = useGlobalReducer()
   const createAgenda = listAgenda()
 
-  // Aqui pondremos como se debe de ver la lista de contactos
-
   return (
     <div className="container-fluid">
-      <ul className="list-group">
-          {/* Map over the 'todos' array from the store and render each item as a list element */}
+      <ul className="list-group m-4">
+          {/* Linked the store form to be viewed as another page */}
           {createAgenda}
       </ul>
       <br />
 
       <Link to="/">
-        <button className="btn btn-primary">Back home</button>
+        <a>or get back to contacts</a>
       </Link>
     </div>
   );
