@@ -1,5 +1,7 @@
 import React from "react";
 
+// Need to add handleDelete and handleEdit functions Headers.
+
 export const ModalBtn = () => {
 
     return (
@@ -22,7 +24,7 @@ export const ModalBtn = () => {
 
                         <div className="modal-header">
                             <h5 className="modal-title" id="exampleModalLabel">Are you sure?</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" className="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
                         <div className="modal-body justify-content-center p-4">
