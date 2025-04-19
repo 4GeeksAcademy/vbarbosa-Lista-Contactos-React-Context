@@ -10,7 +10,7 @@ export const Demo = () => {
     <div className="container">
       <ul className="list-group">
         {/* Map over the 'todos' array from the store and render each item as a list element */}
-        {store && store.todos?.map((item) => {
+        {store && store.agendas?.map((item) => {
           return (
             <li
               key={item.id}  // React key for list items.

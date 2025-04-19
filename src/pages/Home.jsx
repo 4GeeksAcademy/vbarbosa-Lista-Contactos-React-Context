@@ -1,6 +1,7 @@
-import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { ContactCard } from "../components/ContactCard.jsx";
+import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import React, { useEffect } from "react";
+import { AddContact } from "./AddContact.jsx";
 
 
 export const Home = () => {
@@ -16,8 +17,12 @@ export const Home = () => {
   const getAgendas = async () => {
     try {
         const resp = await fetch('https://playground.4geeks.com/contact/agendas');
+        dispatch({ type: 'get_agendas', payload: resp.agendas })
+
         const data = await resp.json()
+        console.log(agendas);
         return data
+
     } catch (error) {
         console.log(error);
     }
@@ -43,8 +48,8 @@ export const Home = () => {
   const getOneAgenda = async (slug = "vbarbosa") => {
     try {
         const resp = await fetch('https://playground.4geeks.com/contact/agendas/' + slug);
-        const data = await resp.json()
-        return data
+        dispatch({ type: 'get_my_agenda', payload: resp.contacts })
+
     } catch (error) {
         console.log(error);
     }

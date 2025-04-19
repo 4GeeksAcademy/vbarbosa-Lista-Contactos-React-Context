@@ -13,7 +13,7 @@ export const Navbar = () => {
 					</span>
 				</Link>
 				<div className="ms-end">
-					<Link to="/demo">
+					<Link to="/add_a_new_contact">
 						{/* This button is linked to demo file which should link to anther page
 						This same button will be able to create a new contact on the agenda */}
 						<button className="btn btn-success">Add New Contact</button>
