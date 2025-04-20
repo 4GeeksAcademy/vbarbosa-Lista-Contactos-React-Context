@@ -1,11 +1,10 @@
 
-
 export const initialStore = () => {
 
   return {
     message: null,
     agendas: null,
-    contacts: null
+    agenda: null
   }
   
 }
@@ -16,7 +15,7 @@ export default function storeReducer(store, action = {}) {
     case 'get_my_agenda':
       return {
         ...store,
-        contacts: action.payload
+        agenda: action.payload
       }
       
     case 'get_agendas':
