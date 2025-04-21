@@ -18,11 +18,11 @@ export default function storeReducer(store, action = {}) {
         agenda: action.payload
       }
       
-    case 'get_agendas':
-      return {
-        ...store,
-        agendas: action.payload
-      }
+    // case 'get_agendas':
+    //   return {
+    //     ...store,
+    //     agendas: action.payload
+    //   }
 
     case 'add_task':
       const { id, color } = action.payload

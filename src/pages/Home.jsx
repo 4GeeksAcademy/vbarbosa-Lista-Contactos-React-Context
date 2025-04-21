@@ -9,57 +9,62 @@ import { ContactCard } from "../components/ContactCard.jsx";
 
 export const Home = () => {
 
-  const {store, dispatch} = useGlobalReducer()  
+  const {store, dispatch} = useGlobalReducer()
+
+  // creates an user under Agendas
+  const createAgenda = async (slug = "vbarbosa") => {
+          try {
+              const resp = await fetch('https://playground.4geeks.com/contact/agendas/' + slug, {
+                method: "POST",
+                headers: {
+                  'accept': 'application/json'
+                }
+              });
+              const data = await resp.json();
+              console.log(data);
+              dispatch({ type: 'get_my_agenda', payload: data.agenda })
+      
+          } catch (error) {
+              console.log(error);
+          }
+        }
+
+  // retrieves all agendas in the API
+  // const getAgendas = async () => {
+  //   try {
+  //       const resp = await fetch('https://playground.4geeks.com/contact/agendas');
+  //       const data = await resp.json()
+  //       dispatch({ type: 'get_agendas', payload: data.agendas })
+
+  //   } catch (error) {
+  //       console.log(error);
+  //   }
+  // }
+
+  // this get the agenda I created only
+  const getOneAgenda = async (slug = "vbarbosa") => {
+
+    try {
+        const resp = await fetch('https://playground.4geeks.com/contact/agendas/' + slug);
+        if (resp.ok) {
+          // Agenda exists, fetch contacts
+          const data = await resp.json();
+          dispatch({ type: 'get_my_agenda', payload: data.contacts });
+      } else {
+          // Agenda does not exist, wait to create it in order to fetch with GET
+          await createAgenda(slug);
+      }
+
+    } catch (error) {
+        console.log(error);
+    }
+  }
 
   // Render the main page
   useEffect(() =>{
-    getOneAgenda()
+    getOneAgenda();
 
   }, []);
-
-  const getAgendas = async () => {
-    try {
-        const resp = await fetch('https://playground.4geeks.com/contact/agendas');
-
-        const data = await resp.json()
-        console.log(data);
-        dispatch({ type: 'get_agendas', payload: resp.agendas })
-
-    } catch (error) {
-        console.log(error);
-    }
-  }
-
-  const createAgenda = async (slug = "vbarbosa") => {
-    try {
-        const resp = await fetch('https://playground.4geeks.com/contact/agendas/' + slug, {
-          method: "POST",
-          headers: {
-            'accept': 'application/json'
-          }
-        });
-        const data = await resp.json();
-        console.log(data);
-        dispatch({ type: 'get_my_agenda', payload: resp.agenda })
-
-    } catch (error) {
-        console.log(error);
-    }
-  }
-
-  const getOneAgenda = async (slug = "vbarbosa") => {
-    try {
-        const resp = await fetch('https://playground.4geeks.com/contact/agendas/' + slug);
-
-        const data = await resp.json();
-        dispatch({ type: 'get_my_agenda', payload: data.contacts });
-
-    } catch (error) {
-        console.log(error);
-    }
-  }
-
-
 
 	return (
 

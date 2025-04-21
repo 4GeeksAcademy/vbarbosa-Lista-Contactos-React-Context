@@ -27,11 +27,6 @@ export const ModalBtn = (props) => {
             const updatedAgenda = await fetch(`https://playground.4geeks.com/contact/agendas/${slug}/contacts`);
             const data = await updatedAgenda.json();
             dispatch({ type: 'get_my_agenda', payload: data.agenda });
-
-            if (resp.ok) {
-                // This allows to go back Home page once we hit save button if there is no error
-                navigate("/");
-            }
         } 
         
         catch (error) {
@@ -40,12 +35,9 @@ export const ModalBtn = (props) => {
     }
 
     return (
-        <div className="row g-0 m-4 justify-content-around">
-            <div className="col-6 col-lg-6">
-                    {/* need to link to another page to update form not part of modal*/}
-                    <button className="btn btn-primary">EDIT</button>
-            </div>
-            <div className="col-6 col-lg-6">
+        <div className="d-flex justify-content-center">
+            
+            <div>
                 {/* This activates the modal */}
                 <button type="button" 
                 className="btn btn-primary" 
@@ -54,6 +46,10 @@ export const ModalBtn = (props) => {
                 data-bs-whatever="@fat">
                     TRASH
                 </button>
+            </div>,
+            <div>
+                {/* need to link to another page to update form not part of modal*/}
+                <button className="btn btn-primary">EDIT</button>
             </div>
 
             {/* This is the modal content */}
