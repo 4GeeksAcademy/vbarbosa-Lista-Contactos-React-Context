@@ -1,8 +1,5 @@
 import React from "react";
 
-// hooks
-import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-
 // components
 import { ModalBtn } from "./Modal";
 
@@ -13,21 +10,6 @@ import { faPhoneFlip } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 export const ContactCard = (props) => {
-
-    const {store, dispatch} = useGlobalReducer()
-     
-    const getOneAgenda = async (slug = "vbarbosa") => {
-        try {
-            const resp = await fetch('https://playground.4geeks.com/contact/agendas/' + slug);
-    
-            const data = await resp.json();
-            console.log(data); // Check the structure of the response
-            dispatch({ type: 'get_my_agenda', payload: data.contacts });
-    
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     return (
         <div className="card mb-3">
