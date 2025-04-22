@@ -1,15 +1,19 @@
 import { Link } from "react-router-dom";
 
+// icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAddressBook } from '@fortawesome/free-solid-svg-icons';
+
 export const Navbar = () => {
 
 	return (
 		<nav className="navbar navbar-light bg-light">
 			<div className="container-fluid m-2 ">
-				<Link to="/">
-					<span className="navbar-brand h1">
+				<Link to="/" className="link-underline-light">
+					<span className="navbar-brand d-flex justify-content-between">
 						{/* I need to add icon here and edit the font to be more fancy */}
-						ICON HERE +
-						Mi Agenda
+						<FontAwesomeIcon icon={faAddressBook} className="fs-1 m-2"/>
+						<h2 className="m-2">Mi Agenda</h2>
 					</span>
 				</Link>
 				<div className="ms-end mt-2 mt-sm-0">

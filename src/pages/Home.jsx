@@ -11,6 +11,12 @@ export const Home = () => {
 
   const {store, dispatch} = useGlobalReducer()
 
+  // Render the main page
+  useEffect(() =>{
+    getOneAgenda();
+
+  }, []);
+
   // creates an user under Agendas
   const createAgenda = async (slug = "vbarbosa") => {
           try {
@@ -59,12 +65,6 @@ export const Home = () => {
         console.log(error);
     }
   }
-
-  // Render the main page
-  useEffect(() =>{
-    getOneAgenda();
-
-  }, []);
 
 	return (
 

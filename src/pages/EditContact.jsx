@@ -1,40 +1,42 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useParams, Link} from "react-router-dom";
 
+// hooks
+import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 
-export const AddContact = () => {
-  
-    // Here we create a constant to be able to add useNavigate inside a function as it's not allowed to call directly
+export const EditContact = () => {
+    
+    const {store, dispatch} = useGlobalReducer();
+
+    // we add to constant useParam in order to be used inside a function
+    const params = useParams();
+    
+    // we add to constant navigate for the same reason above
     const navigate = useNavigate();
 
-    // This constant has the objexts which are required to create a contact with fetch
-    const [newContact, setNewContact] = useState({
-        name:"", 
-        phone: "", 
-        email: "", 
-        address: ""
-    });
+    // we set our states to edit the contact
+    // we make use of params to find on the agendas array the id
+    const [editContact, setEditContact] = useState(store.agenda.find(el => el.id == params.id));    
 
-    // This functions allows to push the new input details to newContact
+    // same as add contact we need to update the contents with the old and new information
     const handleChange = (e) => {
-        setNewContact({
-            ...newContact, [e.target.name]: e.target.value
+        setEditContact({
+            ...editContact, [e.target.name]: e.target.value
         })
-    }
+    }    
 
-
-    // This functions allows to create the new contact with fetch as well prevent from reloading when we fill the form
+    // This time when we make submit we should use PUT to update the edited object
     const handleSubmit = async (e) => {
         e.preventDefault();
         const slug = "vbarbosa";
 
             try {
-                const resp = await fetch('https://playground.4geeks.com/contact/agendas/' + slug + '/contacts', {
-                    method: 'POST',
+                const resp = await fetch('https://playground.4geeks.com/contact/agendas/' + slug + '/contacts/'+ params.id, {
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(newContact)
+                    body: JSON.stringify(editContact)
                 });
 
                 const dataForm = await resp.json()
@@ -50,27 +52,26 @@ export const AddContact = () => {
                 console.log(error);
             }
         
-    };    
-  
+    };
 
     return (
-
+    
         <div className="container-fluid">
 
             <div className="row">
                 <div className="col-12 col-lg-12">
                     <div className="mx-auto">
-                        <h2 className="m-4">Add a new contact</h2>
+                        <h2 className="m-4">Edit Contact</h2>
                     </div>
 
-                    {/* If we want to make an inout to be required we just need to add required to it */}
+                    {/* If we want to make an input to be required we just need to add 'required' element to it */}
                     <form className="m-4" onSubmit={handleSubmit}>
 
                         <div className="mb-3">
                             <label className="form-label">Full Name</label>
                             <input type="text" 
                             className="form-control" 
-                            value={newContact.name} required
+                            value={editContact.name} required
                             onChange={handleChange}
                             name="name"
                             />
@@ -80,7 +81,7 @@ export const AddContact = () => {
                             <label className="form-label">Email address</label>
                             <input type="email" 
                             className="form-control" 
-                            value={newContact.email}
+                            value={editContact.email}
                             onChange={handleChange}
                             name="email"
                             />
@@ -90,7 +91,7 @@ export const AddContact = () => {
                             <label className="form-label">Phone</label>
                             <input type="number" 
                             className="form-control" 
-                            value={newContact.phone} required
+                            value={editContact.phone} required
                             onChange={handleChange}
                             name="phone"
                             />
@@ -100,7 +101,7 @@ export const AddContact = () => {
                             <label className="form-label">Address</label>
                             <input type="text" 
                             className="form-control" 
-                            value={newContact.address}
+                            value={editContact.address}
                             onChange={handleChange}
                             name="address"
                             />
